@@ -1,10 +1,12 @@
 package com.cydeo.loosely;
 
+import java.math.BigDecimal;
+import java.util.UUID;
+
 public class BalanceManager {
-    public boolean checkout(
-            // add method parameters
-    ){
-        // implement checkout business
-        return false;
+    Balance balance;
+    public boolean checkout(BigDecimal checkoutAmount){
+        BigDecimal balanceAmount = balance.getAmount();
+        return balanceAmount.subtract(checkoutAmount).compareTo(BigDecimal.ZERO) > 0;
     }
 }
