@@ -14,13 +14,13 @@ public class Saving {
     private BigDecimal amount;
     private UUID accountId;
 
-    public Saving(Currency currency, BigDecimal amount, UUID accountId) {
-        this.currency = currency;
-        this.amount = amount;
-        this.accountId = accountId;
-    }
+//    public Saving(Currency currency, BigDecimal amount, UUID accountId) {
+//        this.currency = currency;
+//        this.amount = amount;
+//        this.accountId = accountId;
+//    }
 
     public void initialize(){
-        System.out.println("savings account " + "currency: "+ currency.getCode() + "amount: " + amount + "accountId" + accountId);
+        System.out.println("savings account " + "currency:"+ currency.getCode() + " amount:" + amount + " accountId:" + accountId);
     }
 }

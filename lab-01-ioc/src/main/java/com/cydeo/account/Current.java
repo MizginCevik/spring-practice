@@ -13,13 +13,13 @@ public class Current {
     private BigDecimal amount;
     private UUID accountId;
 
-    public Current(Currency currency, BigDecimal amount, UUID accountId) {
-        this.currency = currency;
-        this.amount = amount;
-        this.accountId = accountId;
-    }
+//    public Current(Currency currency, BigDecimal amount, UUID accountId) {
+//        this.currency = currency;
+//        this.amount = amount;
+//        this.accountId = accountId;
+//    }
 
     public void initialize(){
-        System.out.println("current account " + "currency: "+ currency.getCode() + "amount: " + amount + "accountId" + accountId);
+        System.out.println("current account " + "currency:"+ currency.getCode() + " amount:" + amount + " accountId:" + accountId);
     }
 }
