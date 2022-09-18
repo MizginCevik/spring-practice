@@ -1,4 +1,4 @@
-package com.cydeo;
+package com.cydeo.tightly;
 
 import lombok.Getter;
 import lombok.Setter;
