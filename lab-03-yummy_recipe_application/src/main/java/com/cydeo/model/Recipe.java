@@ -1,16 +1,17 @@
 package com.cydeo.model;
 
-import com.cydeo.proxy.RecipeType;
+import com.cydeo.enums.RecipeType;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 @Getter
 @Setter
 public class Recipe {
-    private Long id;
+    private UUID id;
     private String name;
     private Random duration;
     private String preparation;

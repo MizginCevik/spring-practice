@@ -1,6 +1,6 @@
 package com.cydeo.model;
 
-import com.cydeo.proxy.QuantityType;
+import com.cydeo.enums.QuantityType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,6 +8,6 @@ import lombok.Setter;
 @Setter
 public class Ingredients {
     private String name;
-    private Long quantity;
+    private int quantity;
     private QuantityType quantityType;
 }
