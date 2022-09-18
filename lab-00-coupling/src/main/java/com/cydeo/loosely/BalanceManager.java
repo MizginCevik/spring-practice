@@ -1,11 +1,15 @@
 package com.cydeo.loosely;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 public class BalanceManager {
-    Balance balance;
-    public boolean checkout(BigDecimal checkoutAmount){
+//    private final Balance balance;
+//
+//    public BalanceManager(Balance balance) {
+//        this.balance = balance;
+//    }
+
+    public boolean checkout(Balance balance, BigDecimal checkoutAmount){
         BigDecimal balanceAmount = balance.getAmount();
         return balanceAmount.subtract(checkoutAmount).compareTo(BigDecimal.ZERO) > 0;
     }
