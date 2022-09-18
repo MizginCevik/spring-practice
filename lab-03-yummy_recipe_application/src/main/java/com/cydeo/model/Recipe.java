@@ -13,7 +13,7 @@ import java.util.UUID;
 public class Recipe {
     private UUID id;
     private String name;
-    private Random duration;
+    private int duration;
     private String preparation;
     private List<Ingredients> ingredients;
     private RecipeType recipeType;

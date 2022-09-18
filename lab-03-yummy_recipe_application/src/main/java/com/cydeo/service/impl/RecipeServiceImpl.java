@@ -1,5 +1,7 @@
 package com.cydeo.service.impl;
 
+import com.cydeo.enums.QuantityType;
+import com.cydeo.enums.RecipeType;
 import com.cydeo.model.Ingredients;
 import com.cydeo.model.Recipe;
 import com.cydeo.repository.RecipeRepository;
@@ -8,44 +10,60 @@ import com.cydeo.service.ShareService;
 import com.github.javafaker.Faker;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Component
 public class RecipeServiceImpl implements RecipeService {
 
     private final RecipeRepository recipeRepository;
     private final ShareService shareService;
+    private final Faker faker;
 
-    public RecipeServiceImpl(RecipeRepository recipeRepository, ShareService shareService) {
+    public RecipeServiceImpl(RecipeRepository recipeRepository, ShareService shareService, Faker faker) {
         this.recipeRepository = recipeRepository;
         this.shareService = shareService;
+        this.faker = faker;
     }
 
     @Override
     public boolean prepareRecipe() {
-        Recipe recipe=new Recipe();
-        Faker faker= new Faker();
-        List<Ingredients> ingredientsList= new ArrayList<>();
 
-        int i=0;
-        while(i<8){
-            Ingredients ingredients= new Ingredients();
+        for (int i = 0; i < 20; i++) {
+            Arrays.stream(RecipeType.values())
+                    .forEach(recipeType -> {
 
-            ingredients.setName(faker.food().ingredient());
-            ingredients.setQuantity(faker.number().randomDigit());
-            //ingredients.setQuantityType(faker.);
-            ingredientsList.add(ingredients);
+                        Recipe recipe = new Recipe();
+                        recipe.setId(UUID.randomUUID());
+                        recipe.setName(faker.food().dish());
+                        recipe.setDuration(generateRandomValue());
+                        recipe.setPreparation(faker.lorem().paragraph(generateRandomValue()));
+                        recipe.setIngredients(prepareIngredients());
+                        recipe.setRecipeType(recipeType);
+                        recipeRepository.saveRecipe(recipe);
+                        shareService.share(recipe);
 
-            i++;
+                    });
         }
-
-        recipe.setIngredients(ingredientsList);
-        recipeRepository.saveRecipe(recipe);
-        shareService.share(recipe);
-        //initialize list of ingredients by using faker
-//        recipeRepository.saveRecipe();
-//        shareService.share();
         return true;
+    }
+
+    private List<Ingredients> prepareIngredients() {
+        List<QuantityType> quantityTypeList = List.of(QuantityType.values());
+
+        List<Ingredients> ingredientsList = new ArrayList<>();
+
+        for (int i = 0; i < generateRandomValue(); i++) {
+            Ingredients ingredients = new Ingredients();
+            ingredients.setName(faker.food().ingredient());
+            ingredients.setQuantity(generateRandomValue());
+            ingredients.setQuantityType(quantityTypeList.get(new Random().nextInt(3)));
+
+            ingredientsList.add(ingredients);
+        }
+        return ingredientsList;
+    }
+
+    private int generateRandomValue() {
+        return new Random().nextInt(20);
     }
 }
