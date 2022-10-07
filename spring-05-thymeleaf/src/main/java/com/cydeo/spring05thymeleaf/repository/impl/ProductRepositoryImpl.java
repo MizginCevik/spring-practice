@@ -27,4 +27,5 @@ public class ProductRepositoryImpl implements ProductRepository {
     public List<Product> findAll() {
         return PRODUCT_LIST;
     }
+
 }
