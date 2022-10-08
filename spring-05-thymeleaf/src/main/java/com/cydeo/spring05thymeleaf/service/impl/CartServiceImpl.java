@@ -17,6 +17,9 @@ import java.util.stream.Collectors;
 @Service
 public class CartServiceImpl implements CartService {
     public static Cart CART = new Cart(BigDecimal.ZERO,new ArrayList<>());
+    //if you do something static, it means it will be created right away when the application starts.
+    //CART is something we want it to be there when the application starts,
+    //and also since we will be using the same CART object in everywhere in our code, we can make it static
     private final ProductService productService;
 
     public CartServiceImpl(ProductService productService) {
@@ -30,10 +33,12 @@ public class CartServiceImpl implements CartService {
         //todo calculate cart total amount
         //todo add to cart
 
+        Product product = productService.findProductById(productId);
+
         CartItem cartItem = new CartItem();
-        cartItem.setProduct(productService.findProductById(productId));
+        cartItem.setProduct(product);
         cartItem.setQuantity(quantity);
-        cartItem.setTotalAmount(productService.findProductById(productId).getPrice().multiply(BigDecimal.valueOf(quantity)));
+        cartItem.setTotalAmount(product.getPrice().multiply(BigDecimal.valueOf(quantity)));
 
         if (CART.getCartItemList().stream().noneMatch(item -> item.getProduct().getId().toString().equals(cartItem.getProduct().getId().toString()))){
             CART.getCartItemList().add(cartItem);
@@ -47,11 +52,12 @@ public class CartServiceImpl implements CartService {
     public boolean deleteFromCart(UUID productId){
         //todo delete product object from cart using stream
 
-        CartItem cartItemToDelete = CART.getCartItemList().stream().filter(p -> p.getProduct().getId().toString().equals(productId.toString())).findFirst().orElseThrow();
-        CART.getCartItemList().remove(cartItemToDelete);
+        CartItem cartItemToDelete = CART.getCartItemList().stream()
+                .filter(p -> p.getProduct().getId().toString().equals(productId.toString()))
+                .findFirst().orElseThrow();
 
         CART.setCartTotalAmount(CART.getCartTotalAmount().subtract(cartItemToDelete.getTotalAmount()));
 
-        return true;
+        return CART.getCartItemList().remove(cartItemToDelete);
     }
 }
