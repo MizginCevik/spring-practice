@@ -4,3 +4,13 @@
 */target
 *.iml
 
+/spring-06-orm/.mvn/
+/spring-06-orm/src/test/
+/spring-06-orm/mvnw
+/spring-06-orm/mvnw.cmd
+/spring-06-orm/.gitignore
+/spring-07-orm-queries/.mvn/
+/spring-07-orm-queries/src/test/
+/spring-07-orm-queries/mvnw
+/spring-07-orm-queries/mvnw.cmd
+/spring-07-orm-queries/.gitignore
