@@ -1,6 +1,5 @@
 package com.cydeo.repository;
 
-
 import com.cydeo.entity.Balance;
 import com.cydeo.entity.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,14 +22,14 @@ public interface BalanceRepository extends JpaRepository<Balance,Long> {
     Balance findByCustomer_Id(Long id);
 
     //Write a native query to get top 5 max balance
-    @Query(value = "SELECT * FROM balance ORDER BY amount DESC LIMIT 5",nativeQuery = true)
+    @Query(value = "SELECT * FROM balance WHERE amount IS NOT NULL ORDER BY amount DESC LIMIT 5",nativeQuery = true)
     List<Balance> retrieveTop5Amount();
 
     //Write a derived query to get all balances greater than or equal specific balance amount
     List<Balance> findAllByAmountGreaterThanEqual(BigDecimal amount);
 
     //Write a native query to get all balances less than specific balance amount
-    @Query(value = "SELECT * FROM balance WHERE amount < ?1",nativeQuery = true)
+    @Query(value = "SELECT * FROM balance WHERE amount < ?1 ORDER BY amount DESC",nativeQuery = true)
     List<Balance> retrieveBalanceLessThanAmount(@Param("amount") BigDecimal amount);
 
 }

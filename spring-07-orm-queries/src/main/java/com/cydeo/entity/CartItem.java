@@ -20,4 +20,11 @@ public class CartItem extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Product product;
 
+    @Override
+    public String toString() {
+        return "CartItem{" +
+                "quantity=" + quantity +
+                ", cart=" + cart +
+                '}';
+    }
 }
