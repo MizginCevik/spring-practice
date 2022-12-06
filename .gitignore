@@ -14,3 +14,8 @@
 /spring-07-orm-queries/mvnw
 /spring-07-orm-queries/mvnw.cmd
 /spring-07-orm-queries/.gitignore
+/spring-08-rest/.mvn/
+/spring-08-rest/src/test/
+/spring-08-rest/mvnw
+/spring-08-rest/mvnw.cmd
+/spring-08-rest/.gitignore
