@@ -1,8 +1,6 @@
 package com.cydeo.service;
 
 import com.cydeo.dto.ProductDTO;
-import com.cydeo.dto.ProductRequest;
-import com.cydeo.entity.Category;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -15,7 +13,8 @@ public interface ProductService {
     List<ProductDTO> findTop3();
     ProductDTO findByName(String name);
     List<ProductDTO> findByCategory(Long id);
-    Integer findByPrice(BigDecimal price);
-    List<ProductDTO> findByPriceAndQuantity(ProductRequest productRequest);
+    Integer findCountByPrice(BigDecimal price);
+    List<ProductDTO> findByCategoryAndPrice(List<Long> categoryList, BigDecimal price);
+    List<ProductDTO> findByPriceAndQuantity(BigDecimal price, Integer quantity);
 
 }

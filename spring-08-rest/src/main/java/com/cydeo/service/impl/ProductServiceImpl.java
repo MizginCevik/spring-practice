@@ -1,8 +1,6 @@
 package com.cydeo.service.impl;
 
 import com.cydeo.dto.ProductDTO;
-import com.cydeo.dto.ProductRequest;
-import com.cydeo.entity.Category;
 import com.cydeo.entity.Product;
 import com.cydeo.mapper.MapperUtil;
 import com.cydeo.repository.ProductRepository;
@@ -62,14 +60,20 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Integer findByPrice(BigDecimal price) {
+    public Integer findCountByPrice(BigDecimal price) {
         Integer count = productRepository.countProductByPriceGreaterThan(price);
         return count;
     }
 
     @Override
-    public List<ProductDTO> findByPriceAndQuantity(ProductRequest productRequest) {
-        List<Product> productList = productRepository.retrieveProductListByCategory(productRequest.getCategoryList(), productRequest.getPrice());
+    public List<ProductDTO> findByCategoryAndPrice(List<Long> categoryList, BigDecimal price) {
+        List<Product> productList = productRepository.retrieveProductListByCategory(categoryList, price);
+        return productList.stream().map(product -> mapperUtil.convert(product, new ProductDTO())).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ProductDTO> findByPriceAndQuantity(BigDecimal price, Integer quantity) {
+        List<Product> productList = productRepository.retrieveProductListGreaterThanPriceAndLowerThanRemainingQuantity(price,quantity);
         return productList.stream().map(product -> mapperUtil.convert(product, new ProductDTO())).collect(Collectors.toList());
     }
 
