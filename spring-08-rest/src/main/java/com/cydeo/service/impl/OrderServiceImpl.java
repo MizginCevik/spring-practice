@@ -23,32 +23,32 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderDTO createOrder(OrderDTO orderDTO) {
+    public OrderDTO create(OrderDTO orderDTO) {
         orderRepository.save(mapperUtil.convert(orderDTO, new Order()));
         return orderDTO;
     }
 
     @Override
-    public OrderDTO updateOrder(OrderDTO orderDTO) {
+    public OrderDTO update(OrderDTO orderDTO) {
         Order order = mapperUtil.convert(orderDTO, new Order());
         orderRepository.save(order);
         return orderDTO;
     }
 
     @Override
-    public List<OrderDTO> getAddressList() {
+    public List<OrderDTO> findAll() {
         List<Order> orderList = orderRepository.findAll();
         return orderList.stream().map(order -> mapperUtil.convert(order, new OrderDTO())).collect(Collectors.toList());
     }
 
     @Override
-    public List<OrderDTO> getOrderListByEmail(String email) {
+    public List<OrderDTO> findByEmail(String email) {
         List<Order> orderList = orderRepository.findAllByCustomer_Email(email);
         return orderList.stream().map(order -> mapperUtil.convert(order, new OrderDTO())).collect(Collectors.toList());
     }
 
     @Override
-    public List<OrderDTO> getOrderListByPaymentMethod(PaymentMethod paymentMethod) {
+    public List<OrderDTO> findByPaymentMethod(PaymentMethod paymentMethod) {
         List<Order> orderList = orderRepository.findAllByPayment_PaymentMethod(paymentMethod);
         return orderList.stream().map(order -> mapperUtil.convert(order, new OrderDTO())).collect(Collectors.toList());
     }

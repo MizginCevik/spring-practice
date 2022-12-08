@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface DiscountService {
 
-    List<DiscountDTO> getDiscountList();
-    DiscountDTO getDiscountListByName(String name);
-    DiscountDTO createDiscount(DiscountDTO discountDTO);
-    DiscountDTO updateDiscount(DiscountDTO discountDTO);
+    List<DiscountDTO> findAll();
+    DiscountDTO findByName(String name);
+    DiscountDTO create(DiscountDTO discountDTO);
+    DiscountDTO update(DiscountDTO discountDTO);
 
 }

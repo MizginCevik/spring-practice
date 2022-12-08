@@ -22,25 +22,25 @@ public class DiscountServiceImpl implements DiscountService {
     }
 
     @Override
-    public List<DiscountDTO> getDiscountList() {
+    public List<DiscountDTO> findAll() {
         List<Discount> discountList = discountRepository.findAll();
         return discountList.stream().map(discount -> mapperUtil.convert(discount, new DiscountDTO())).collect(Collectors.toList());
     }
 
     @Override
-    public DiscountDTO getDiscountListByName(String name) {
+    public DiscountDTO findByName(String name) {
         Discount discount = discountRepository.findFirstByName(name);
         return mapperUtil.convert(discount, new DiscountDTO());
     }
 
     @Override
-    public DiscountDTO createDiscount(DiscountDTO discountDTO) {
+    public DiscountDTO create(DiscountDTO discountDTO) {
         discountRepository.save(mapperUtil.convert(discountDTO, new Discount()));
         return discountDTO;
     }
 
     @Override
-    public DiscountDTO updateDiscount(DiscountDTO discountDTO) {
+    public DiscountDTO update(DiscountDTO discountDTO) {
         Discount discount = mapperUtil.convert(discountDTO, new Discount());
         discountRepository.save(discount);
         return discountDTO;

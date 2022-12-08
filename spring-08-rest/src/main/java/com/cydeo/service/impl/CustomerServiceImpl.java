@@ -22,25 +22,25 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<CustomerDTO> getCustomerList() {
+    public List<CustomerDTO> findAll() {
         List<Customer> customerList = customerRepository.findAll();
         return customerList.stream().map(customer -> mapperUtil.convert(customerList, new CustomerDTO())).collect(Collectors.toList());
     }
 
     @Override
-    public CustomerDTO getCustomerListByEmail(String email) {
+    public CustomerDTO findByEmail(String email) {
         Customer customer = customerRepository.retrieveByCustomerEmail(email);
         return mapperUtil.convert(customer, new CustomerDTO());
     }
 
     @Override
-    public CustomerDTO createCustomer(CustomerDTO customerDTO) {
+    public CustomerDTO create(CustomerDTO customerDTO) {
         customerRepository.save(mapperUtil.convert(customerDTO, new Customer()));
         return customerDTO;
     }
 
     @Override
-    public CustomerDTO updateCustomer(CustomerDTO customerDTO) {
+    public CustomerDTO update(CustomerDTO customerDTO) {
         Customer customer = mapperUtil.convert(customerDTO, new Customer());
         customerRepository.save(customer);
         return customerDTO;

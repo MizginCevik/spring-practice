@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface OrderService {
 
-    OrderDTO createOrder(OrderDTO orderDTO);
-    OrderDTO updateOrder(OrderDTO orderDTO);
-    List<OrderDTO> getAddressList();
-    List<OrderDTO> getOrderListByEmail(String email);
-    List<OrderDTO> getOrderListByPaymentMethod(PaymentMethod paymentMethod);
+    OrderDTO create(OrderDTO orderDTO);
+    OrderDTO update(OrderDTO orderDTO);
+    List<OrderDTO> findAll();
+    List<OrderDTO> findByEmail(String email);
+    List<OrderDTO> findByPaymentMethod(PaymentMethod paymentMethod);
 
 }

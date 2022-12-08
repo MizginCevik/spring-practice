@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface CustomerService {
 
-    List<CustomerDTO> getCustomerList();
-    CustomerDTO getCustomerListByEmail(String email);
-    CustomerDTO createCustomer(CustomerDTO customerDTO);
-    CustomerDTO updateCustomer(CustomerDTO customerDTO);
+    List<CustomerDTO> findAll();
+    CustomerDTO findByEmail(String email);
+    CustomerDTO create(CustomerDTO customerDTO);
+    CustomerDTO update(CustomerDTO customerDTO);
 
 }

@@ -9,13 +9,13 @@ import java.util.List;
 
 public interface ProductService {
 
-    ProductDTO createProduct(ProductDTO productDTO);
-    ProductDTO updateProduct(ProductDTO productDTO);
-    List<ProductDTO> getProductList();
-    List<ProductDTO> getTop3ProductList();
-    ProductDTO getProductListByName(String name);
-    List<ProductDTO> getProductListByCategory(Long id);
-    Integer getProductListByPrice(BigDecimal price);
-    List<ProductDTO> getProductListByPriceAndQuantity(ProductRequest productRequest);
+    ProductDTO create(ProductDTO productDTO);
+    ProductDTO update(ProductDTO productDTO);
+    List<ProductDTO> findAll();
+    List<ProductDTO> findTop3();
+    ProductDTO findByName(String name);
+    List<ProductDTO> findByCategory(Long id);
+    Integer findByPrice(BigDecimal price);
+    List<ProductDTO> findByPriceAndQuantity(ProductRequest productRequest);
 
 }
