@@ -8,6 +8,7 @@ import com.cydeo.service.CustomerService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,6 +20,12 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerServiceImpl(CustomerRepository customerRepository, MapperUtil mapperUtil) {
         this.customerRepository = customerRepository;
         this.mapperUtil = mapperUtil;
+    }
+
+    @Override
+    public CustomerDTO findById(Long id) {
+        Optional<Customer> customer = customerRepository.findById(id);
+        return mapperUtil.convert(customer, new CustomerDTO());
     }
 
     @Override

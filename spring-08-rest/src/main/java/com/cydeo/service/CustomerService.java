@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface CustomerService {
 
+    CustomerDTO findById(Long id);
     List<CustomerDTO> findAll();
     CustomerDTO findByEmail(String email);
     CustomerDTO create(CustomerDTO customerDTO);

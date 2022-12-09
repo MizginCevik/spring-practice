@@ -37,8 +37,6 @@ public class AddressServiceImpl implements AddressService {
     public AddressDTO update(AddressDTO addressDTO) {
         Address address = mapperUtil.convert(addressDTO, new Address());
         addressRepository.save(address);
-//        AddressDTO updatedAddress = mapperUtil.convert(address, new AddressDTO());
-
         return addressDTO;
     }
 

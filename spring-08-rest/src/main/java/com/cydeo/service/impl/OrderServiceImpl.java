@@ -1,11 +1,20 @@
 package com.cydeo.service.impl;
 
+import com.cydeo.dto.CartDTO;
+import com.cydeo.dto.CustomerDTO;
 import com.cydeo.dto.OrderDTO;
+import com.cydeo.dto.PaymentDTO;
+import com.cydeo.entity.Cart;
+import com.cydeo.entity.Customer;
 import com.cydeo.entity.Order;
+import com.cydeo.entity.Payment;
 import com.cydeo.enums.PaymentMethod;
 import com.cydeo.mapper.MapperUtil;
 import com.cydeo.repository.OrderRepository;
+import com.cydeo.service.CartService;
+import com.cydeo.service.CustomerService;
 import com.cydeo.service.OrderService;
+import com.cydeo.service.PaymentService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,10 +25,16 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
     private final MapperUtil mapperUtil;
+    private final CustomerService customerService;
+    private final CartService cartService;
+    private final PaymentService paymentService;
 
-    public OrderServiceImpl(OrderRepository orderRepository, MapperUtil mapperUtil) {
+    public OrderServiceImpl(OrderRepository orderRepository, MapperUtil mapperUtil, CustomerService customerService, CartService cartService, PaymentService paymentService) {
         this.orderRepository = orderRepository;
         this.mapperUtil = mapperUtil;
+        this.customerService = customerService;
+        this.cartService = cartService;
+        this.paymentService = paymentService;
     }
 
     @Override
@@ -31,7 +46,18 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderDTO update(OrderDTO orderDTO) {
         Order order = mapperUtil.convert(orderDTO, new Order());
+
+        CustomerDTO customer = customerService.findById(orderDTO.getCustomerId());
+        order.setCustomer(mapperUtil.convert(customer, new Customer()));
+
+        PaymentDTO payment = paymentService.findById(orderDTO.getPaymentId());
+        order.setPayment(mapperUtil.convert(payment, new Payment()));
+
+        CartDTO cart = cartService.findById(orderDTO.getCartId());
+        order.setCart(mapperUtil.convert(cart, new Cart()));
+
         orderRepository.save(order);
+
         return orderDTO;
     }
 
