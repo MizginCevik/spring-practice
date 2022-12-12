@@ -45,14 +45,14 @@ public class ProductController {
     }
 
     @GetMapping("{name}")
-    public ResponseEntity<ResponseWrapper> getProductListByName(@PathVariable("name") String name) {
+    public ResponseEntity<ResponseWrapper> getProductByName(@PathVariable("name") String name) {
         return ResponseEntity.ok(new ResponseWrapper("Product is retrieved by name.",
                 productService.findByName(name), HttpStatus.OK));
     }
 
     @GetMapping("/category/{id}")
     public ResponseEntity<ResponseWrapper> getProductListByCategory(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(new ResponseWrapper("Product is retrieved by category.",
+        return ResponseEntity.ok(new ResponseWrapper("Product List is retrieved by category.",
                 productService.findByCategory(id), HttpStatus.OK));
     }
 
@@ -64,13 +64,13 @@ public class ProductController {
 
     @PostMapping("/categoryandprice")
     public ResponseEntity<ResponseWrapper> getProductListByCategoryAndPrice(@RequestBody ProductRequest productRequest) {
-        return ResponseEntity.ok(new ResponseWrapper("Product is retrieved.",
+        return ResponseEntity.ok(new ResponseWrapper("Product List is retrieved.",
                 productService.findByCategoryAndPrice(productRequest.getCategoryList(), productRequest.getPrice()), HttpStatus.OK));
     }
 
     @GetMapping("/price/{price}/quantity/{quantity}")
     public ResponseEntity<ResponseWrapper> getProductListByPriceAndQuantity(@PathVariable("price") BigDecimal price, @PathVariable("quantity") Integer quantity) {
-        return ResponseEntity.ok(new ResponseWrapper("Product is retrieved by price.",
+        return ResponseEntity.ok(new ResponseWrapper("Product List is retrieved by price and quantity.",
                 productService.findByPriceAndQuantity(price, quantity), HttpStatus.OK));
     }
 

@@ -10,8 +10,8 @@ public interface AddressService {
     List<AddressDTO> findAll();
     AddressDTO create(AddressDTO addressDTO);
     AddressDTO update(AddressDTO addressDTO);
-    List<AddressDTO> findByCustomerId(Long id);
-    List<AddressDTO> findByStartsWithAddress(String pattern);
-    List<AddressDTO> findByCustomerAndName(Long id, String name);
+    List<AddressDTO> findAllByCustomerId(Long id);
+    List<AddressDTO> findAllByStartsWith(String pattern);
+    List<AddressDTO> findAllByCustomerIdAndName(Long id, String name);
 
 }

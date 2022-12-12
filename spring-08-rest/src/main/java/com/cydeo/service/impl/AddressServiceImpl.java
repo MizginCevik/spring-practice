@@ -34,8 +34,14 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public AddressDTO create(AddressDTO addressDTO) {
-        addressRepository.save(mapperUtil.convert(addressDTO, new Address()));
-        return addressDTO;
+        Address address = mapperUtil.convert(addressDTO, new Address());
+
+        CustomerDTO customer = customerService.findById(addressDTO.getCustomerId());
+        address.setCustomer(mapperUtil.convert(customer, new Customer()));
+
+        Address savedAddress = addressRepository.save(address);
+
+        return mapperUtil.convert(savedAddress, new AddressDTO());
     }
 
     @Override
@@ -45,25 +51,25 @@ public class AddressServiceImpl implements AddressService {
         CustomerDTO customer = customerService.findById(addressDTO.getCustomerId());
         address.setCustomer(mapperUtil.convert(customer, new Customer()));
 
-        addressRepository.save(address);
+        Address updatedAddress = addressRepository.save(address);
 
-        return addressDTO;
+        return mapperUtil.convert(updatedAddress, new AddressDTO());
     }
 
     @Override
-    public List<AddressDTO> findByCustomerId(Long id) {
+    public List<AddressDTO> findAllByCustomerId(Long id) {
         List<Address> addressList = addressRepository.retrieveByCustomerId(id);
         return addressList.stream().map(address -> mapperUtil.convert(address, new AddressDTO())).collect(Collectors.toList());
     }
 
     @Override
-    public List<AddressDTO> findByStartsWithAddress(String pattern) {
+    public List<AddressDTO> findAllByStartsWith(String pattern) {
         List<Address> addressList = addressRepository.findAllByStreetStartingWith(pattern);
         return addressList.stream().map(address -> mapperUtil.convert(address, new AddressDTO())).collect(Collectors.toList());
     }
 
     @Override
-    public List<AddressDTO> findByCustomerAndName(Long id, String name) {
+    public List<AddressDTO> findAllByCustomerIdAndName(Long id, String name) {
         List<Address> addressList = addressRepository.findAllByCustomer_IdAndName(id, name);
         return addressList.stream().map(address -> mapperUtil.convert(address, new AddressDTO())).collect(Collectors.toList());
     }

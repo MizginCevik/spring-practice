@@ -34,18 +34,18 @@ public class AddressController {
     }
 
     @GetMapping("/customer/{id}")
-    public ResponseEntity<ResponseWrapper> getAddressListByCustomerId(@PathVariable("id") Long customerId) {
-        return ResponseEntity.ok(new ResponseWrapper("Address is retrieved by using customer id.", addressService.findByCustomerId(customerId), HttpStatus.OK));
+    public ResponseEntity<ResponseWrapper> getAddressByCustomerId(@PathVariable("id") Long customerId) {
+        return ResponseEntity.ok(new ResponseWrapper("Address is retrieved by using customer id.", addressService.findAllByCustomerId(customerId), HttpStatus.OK));
     }
 
     @GetMapping("/startsWith/{address}")
-    public ResponseEntity<ResponseWrapper> getAddressListByStartsWithAddress(@PathVariable("address") String address) {
-        return ResponseEntity.ok(new ResponseWrapper("Address is retrieved by using customer id.", addressService.findByStartsWithAddress(address), HttpStatus.OK));
+    public ResponseEntity<ResponseWrapper> getAddressByStartsWith(@PathVariable("address") String address) {
+        return ResponseEntity.ok(new ResponseWrapper("Address is retrieved by using customer id.", addressService.findAllByStartsWith(address), HttpStatus.OK));
     }
 
     @GetMapping("/customer/{customerId}/name/{name}")
-    public ResponseEntity<ResponseWrapper> getAddressListByCustomerAndName(@PathVariable("customerId") Long customerId, @PathVariable("name") String name) {
-        return ResponseEntity.ok(new ResponseWrapper("Address is retrieved by using customer id.", addressService.findByCustomerAndName(customerId,name), HttpStatus.OK));
+    public ResponseEntity<ResponseWrapper> getAddressByCustomerIdAndName(@PathVariable("customerId") Long customerId, @PathVariable("name") String name) {
+        return ResponseEntity.ok(new ResponseWrapper("Address is retrieved by using customer id.", addressService.findAllByCustomerIdAndName(customerId,name), HttpStatus.OK));
     }
 
 }

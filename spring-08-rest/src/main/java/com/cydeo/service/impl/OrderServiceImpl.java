@@ -39,8 +39,20 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDTO create(OrderDTO orderDTO) {
-        orderRepository.save(mapperUtil.convert(orderDTO, new Order()));
-        return orderDTO;
+        Order order = mapperUtil.convert(orderDTO, new Order());
+
+        CustomerDTO customer = customerService.findById(orderDTO.getCustomerId());
+        order.setCustomer(mapperUtil.convert(customer, new Customer()));
+
+        PaymentDTO payment = paymentService.findById(orderDTO.getPaymentId());
+        order.setPayment(mapperUtil.convert(payment, new Payment()));
+
+        CartDTO cart = cartService.findById(orderDTO.getCartId());
+        order.setCart(mapperUtil.convert(cart, new Cart()));
+
+        Order savedOrder = orderRepository.save(order);
+
+        return mapperUtil.convert(savedOrder, new OrderDTO());
     }
 
     @Override
@@ -56,9 +68,9 @@ public class OrderServiceImpl implements OrderService {
         CartDTO cart = cartService.findById(orderDTO.getCartId());
         order.setCart(mapperUtil.convert(cart, new Cart()));
 
-        orderRepository.save(order);
+        Order updatedOrder = orderRepository.save(order);
 
-        return orderDTO;
+        return mapperUtil.convert(updatedOrder, new OrderDTO());
     }
 
     @Override

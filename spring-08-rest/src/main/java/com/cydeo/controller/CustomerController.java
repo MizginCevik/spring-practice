@@ -23,8 +23,8 @@ public class CustomerController {
     }
 
     @GetMapping("/{email}")
-    public ResponseEntity<ResponseWrapper> getCustomerListByEmail(@PathVariable("email") String email) {
-        return ResponseEntity.ok(new ResponseWrapper("Customer List is retrieved by using email.", customerService.findByEmail(email), HttpStatus.OK));
+    public ResponseEntity<ResponseWrapper> getCustomerByEmail(@PathVariable("email") String email) {
+        return ResponseEntity.ok(new ResponseWrapper("Customer is retrieved by using email.", customerService.findByEmail(email), HttpStatus.OK));
     }
 
     @PostMapping

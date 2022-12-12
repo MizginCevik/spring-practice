@@ -35,15 +35,14 @@ public class DiscountServiceImpl implements DiscountService {
 
     @Override
     public DiscountDTO create(DiscountDTO discountDTO) {
-        discountRepository.save(mapperUtil.convert(discountDTO, new Discount()));
-        return discountDTO;
+        Discount discount = discountRepository.save(mapperUtil.convert(discountDTO, new Discount()));
+        return mapperUtil.convert(discount, new DiscountDTO());
     }
 
     @Override
     public DiscountDTO update(DiscountDTO discountDTO) {
-        Discount discount = mapperUtil.convert(discountDTO, new Discount());
-        discountRepository.save(discount);
-        return discountDTO;
+        Discount discount = discountRepository.save(mapperUtil.convert(discountDTO, new Discount()));
+        return mapperUtil.convert(discount, new DiscountDTO());
     }
 
 }

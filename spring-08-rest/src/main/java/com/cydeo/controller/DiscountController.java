@@ -23,8 +23,8 @@ public class DiscountController {
     }
 
     @GetMapping("{name}")
-    public ResponseEntity<ResponseWrapper> getDiscountListByName(@PathVariable("name") String name) {
-        return ResponseEntity.ok(new ResponseWrapper("Discount List is retrieved by using name.", discountService.findByName(name), HttpStatus.OK));
+    public ResponseEntity<ResponseWrapper> getDiscountByName(@PathVariable("name") String name) {
+        return ResponseEntity.ok(new ResponseWrapper("Discount is retrieved by using name.", discountService.findByName(name), HttpStatus.OK));
     }
 
     @PostMapping

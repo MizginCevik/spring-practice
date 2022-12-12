@@ -34,12 +34,12 @@ public class OrderController {
     }
 
     @GetMapping("/email/{email}")
-    public ResponseEntity<ResponseWrapper> getOrderListByEmail(@PathVariable("email") String email) {
+    public ResponseEntity<ResponseWrapper> getOrderByEmail(@PathVariable("email") String email) {
         return ResponseEntity.ok(new ResponseWrapper("Order is retrieved by using email.", orderService.findByEmail(email), HttpStatus.OK));
     }
 
     @GetMapping("/paymentMethod/{paymentMethod}")
-    public ResponseEntity<ResponseWrapper> getOrderListByPaymentMethod(@PathVariable("paymentMethod") PaymentMethod paymentMethod) {
+    public ResponseEntity<ResponseWrapper> getOrderByPaymentMethod(@PathVariable("paymentMethod") PaymentMethod paymentMethod) {
         return ResponseEntity.ok(new ResponseWrapper("Order is retrieved by using payment method.", orderService.findByPaymentMethod(paymentMethod), HttpStatus.OK));
     }
 

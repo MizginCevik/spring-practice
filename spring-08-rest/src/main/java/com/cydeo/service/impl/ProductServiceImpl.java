@@ -24,15 +24,14 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDTO create(ProductDTO productDTO) {
-        productRepository.save(mapperUtil.convert(productDTO, new Product()));
-        return productDTO;
+        Product product = productRepository.save(mapperUtil.convert(productDTO, new Product()));
+        return mapperUtil.convert(product, new ProductDTO());
     }
 
     @Override
     public ProductDTO update(ProductDTO productDTO) {
-        Product product = mapperUtil.convert(productDTO, new Product());
-        productRepository.save(product);
-        return productDTO;
+        Product product = productRepository.save(mapperUtil.convert(productDTO, new Product()));
+        return mapperUtil.convert(product, new ProductDTO());
     }
 
     @Override
